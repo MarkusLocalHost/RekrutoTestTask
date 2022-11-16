@@ -9,7 +9,12 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        self.wfile.write(b'Hello ' + name[0].encode(encoding="UTF-8") + b'! ' + message[0].encode(encoding="UTF-8") + b'!')
+        try:
+            self.wfile.write(
+                b'Hello ' + name[0].encode(encoding="UTF-8") + b'! ' + message[0].encode(encoding="UTF-8") + b'!')
+        except:
+            self.wfile.write(
+                b'Sorry, you didnt enter name or message...')
 
 
 def run():
